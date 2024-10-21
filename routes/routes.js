@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router()
 
 
-app.get("/view-test", (req, res) => {
+router.get("/view-test", (req, res) => {
     const options = {
       title: "Rendering Views with Express is so COOL!!!!!",
       content:
-        "Here, we've created a basic template engine using <code>app.engine()</code> \
+        "Here, we've created a basic template engine using <code>router.engine()</code> \
         and the <code>fs</code> module, then used <code>res.render</code> to \
         render this page using custom content within the template.<br><br> \
         Generally, you won't want to create your own view engines, \
@@ -27,7 +27,7 @@ app.get("/view-test", (req, res) => {
   
   // this will only run for a GET request at localhost:3000/
   // express looks at two things, the method and the url
-  app.get("/", (req, res) => {
+  router.get("/", (req, res) => {
     res.send(`home route`)
   })
   
@@ -40,16 +40,16 @@ app.get("/view-test", (req, res) => {
     }
   }
   
-  app.get("/express", anotherMiddlware, (req, res) => {
+  router.get("/express", anotherMiddlware, (req, res) => {
     res.send("<h1>Creating routes with Express is simple!</h1>")
   })
   
   
-  app.get("/user", (req, res) => {
+  router.get("/user", (req, res) => {
     res.send("Recieved a GET request for user")
   })
   
-  app.post("/user", (req, res) => {
+  router.post("/user", (req, res) => {
     res
       .status(201)
       .send({
@@ -68,12 +68,12 @@ app.get("/view-test", (req, res) => {
   // ? - optional
   //matches:
   //abcd or acd
-  app.get("/ab?cd", (req,res) => {
+  router.get("/ab?cd", (req,res) => {
     res.send("ab?cd")
   })
   //matches:
   //color or colour
-  app.get("/colou?r", (req,res) => {
+  router.get("/colou?r", (req,res) => {
     res.send("colou?r")
   })
   
@@ -81,7 +81,7 @@ app.get("/view-test", (req, res) => {
   // matches:
   // efgh
   // effffffffffffgh
-  app.get('/ef+gh', (req, res) => {
+  router.get('/ef+gh', (req, res) => {
     res.send("ef+gh")
   })
   
@@ -89,7 +89,7 @@ app.get("/view-test", (req, res) => {
   // matches
   // ijkl
   // ijANYTHING-CAN-GO-HEREkl
-  app.get('/ij*kl', (req, res) => {
+  router.get('/ij*kl', (req, res) => {
     res.send("ij*kl")
   })
   
@@ -98,30 +98,30 @@ app.get("/view-test", (req, res) => {
   // matches:
   // /lmnop
   // /lmp
-  app.get("/lm(no)?p", (req, res) => {
+  router.get("/lm(no)?p", (req, res) => {
     res.send("/lm(no)?p")
   })
   
   
   // regex
-  // app.get(/a/, (req, res) => {
+  // router.get(/a/, (req, res) => {
   //   res.send("theres a 'a' in the path")
   // })
   
-  app.get(/.*fly$/, (req, res) => {
+  router.get(/.*fly$/, (req, res) => {
     res.send("fly at the end of word")
   });
   
   
-  app.get("/greeting/:name", (req, res) => {
+  router.get("/greeting/:name", (req, res) => {
     res.send(`this is the param: ${req.params.name}`)
   })
   
-  app.get("/flights/:from-:to", (req, res) => {
+  router.get("/flights/:from-:to", (req, res) => {
     res.send(`Flight coming from ${req.params.from} and going to ${req.params.to}`)
   })
   
-  app.route('/learner')
+  router.route('/learner')
     .get((req, res) => {
       res.send('Get a random learner')
     })
@@ -134,20 +134,20 @@ app.get("/view-test", (req, res) => {
   
   
   // Redirecting requests
-  app.get('/go-somewhere', (req, res) => {
+  router.get('/go-somewhere', (req, res) => {
     res.redirect('/somewhere')
   })
   
-  app.get("/somewhere", (req, res) => {
+  router.get("/somewhere", (req, res) => {
     res.send("Your now here!")
   })
   
-  app.get("/goto-medium", (req, res) => {
+  router.get("/goto-medium", (req, res) => {
     res.redirect("https://medium.com")
   })
   
   //JSON
-  app.get('/get-learner', (req, res) => {
+  router.get('/get-learner', (req, res) => {
     const learner = {
       learner: "John",
       grades: [90, 87, 76, 98, 100],
